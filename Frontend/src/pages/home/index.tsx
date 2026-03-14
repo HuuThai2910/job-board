@@ -1,27 +1,20 @@
-import { callFetchUser } from "@/config/api";
-import { useEffect, useState } from "react";
+import { Divider } from 'antd';
+import styles from 'styles/client.module.scss';
+import SearchClient from '@/components/client/search.client';
+import JobCard from '@/components/client/card/job.card';
+import CompanyCard from '@/components/client/card/company.card';
 
 const HomePage = () => {
-    const [id, setId] = useState<string>("");
-    const [user, setUser] = useState("");
-
-    const handleSearchUser = async () => {
-        const res = await callFetchUser(id);
-        if (res) setUser(res)
-    }
-
     return (
-        <div>
-            <br />
-            <div>
-                homepage:
-                <input value={id} onChange={(e) => setId(e.target.value)} />
-                <button onClick={() => handleSearchUser()}>Search</button>
+        <div className={`${styles["container"]} ${styles["home-section"]}`}>
+            <div className="search-content" style={{ marginTop: 20 }}>
+                <SearchClient />
             </div>
-            <div>
-                User data = {JSON.stringify(user)}
-            </div>
-            <br /> <br /> <br />
+            <Divider />
+            <CompanyCard />
+            <div style={{ margin: 50 }}></div>
+            <Divider />
+            <JobCard />
         </div>
     )
 }
